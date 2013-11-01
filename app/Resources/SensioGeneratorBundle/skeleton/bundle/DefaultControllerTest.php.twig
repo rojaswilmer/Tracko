@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }}\Tests\Controller;
+
+{% block use_statements %}
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * Dummy test
+ */
+class DefaultControllerTest extends WebTestCase
+{% endblock class_definition %}
+{
+{% block class_body %}
+    /**
+     * Dummy test
+     */
+    public function testIndex()
+    {
+        $this->assertTrue(true);
+    }
+{% endblock class_body %}
+}

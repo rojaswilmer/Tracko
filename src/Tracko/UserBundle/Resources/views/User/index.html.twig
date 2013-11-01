@@ -1,0 +1,37 @@
+{% extends 'TrackoCoreBundle:Base:responsive.html.twig' %}
+
+{% block content -%}
+    <h1>User list</h1>
+
+    <table class="item-list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Facebook</th>
+                <th>Twitter</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.facebook }}</td>
+                <td>{{ user.twitter }}</td>
+                <td>{{ user.name }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}

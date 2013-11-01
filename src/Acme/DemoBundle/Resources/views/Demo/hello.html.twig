@@ -1,0 +1,21 @@
+{% extends "AcmeDemoBundle::layout.html.twig" %}
+
+{% block title "Hello " ~ name %}
+
+{% block content %}
+    <h1>Hello!!! jasgkjagsjagf {{ name }}!</h1>
+    <div data-hull-component="login/vivi.torresg@gmail.com"></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="https://d3f5pyioow99x0.cloudfront.net/0.7.4/hull.js"></script>
+<script>
+alert('before init');
+  Hull.init({
+    appId: "526f90af33a1593cde000041",
+    orgUrl: "https://3d5c0a42.hullapp.io"
+  });
+  alert('done');
+</script>
+
+{% endblock %}
+
+{% set code = code(_self) %}

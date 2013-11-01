@@ -1,0 +1,12 @@
+date:
+  year: 'År'
+  month: 'Månad'
+  day: 'Dag'
+
+form:
+  update: Spara
+  create: Skapa
+  delete: Radera
+site:
+  slogan: 'Repeat, learn, repeat'
+  name: 'Wordalist'

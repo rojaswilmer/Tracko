@@ -1,0 +1,61 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Displays a form to edit an existing {{ entity }} entity.
+{% endblock phpdoc_method_header %}
+     *
+     * @param Request $request
+     * @param {{ entity_class }} ${{ varname }}
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/{id}/edit", name="{{ route_name_prefix }}_edit", requirements={"id" = "\d+"})
+     * @ParamConverter("{{ varname }}")
+     * @Template()
+     *
+     * @return array
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function editAction(Request $request, {{ entity_class }} ${{ varname }})
+{% endblock method_definition %}
+    {
+{% block method_body %}
+
+        $editForm = $this->createForm(new {{ entity_class }}Type(), ${{ varname }}, array(
+            'action' => $this->generateUrl('{{ route_name_prefix }}_edit', array('id' => ${{ varname }}->getId())),
+        ));
+        $editForm->add('submit', 'submit', array('label' => 'form.update'));
+
+        $deleteForm = $this->createDeleteForm(${{ varname }}->getId());
+
+        if($request->isMethod('POST')){
+            $editForm->handleRequest($request);
+
+            if ($editForm->isValid()) {
+                $em=$this->getEntityManager();
+                $em->persist(${{ varname }});
+                $em->flush();
+            }
+        }
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            '{{ varname }}'      => ${{ varname }},
+            'form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:edit.html.twig', array(
+            '{{ varname }}'      => ${{ varname }},
+            'edit_form'   => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+{% endif %}
+{% endblock method_return %}
+    }
+
+{% block form %}
+{% endblock form %}

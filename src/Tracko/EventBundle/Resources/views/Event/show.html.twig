@@ -1,0 +1,54 @@
+{% extends 'TrackoCoreBundle:Base:responsive.html.twig' %}
+{% block event_name %}{{ event.name }}{% endblock %}
+
+{% block content -%}
+    <h1>{{ event.name }}</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ event.name }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ event.date|date('Y-m-d') }}</td>
+            </tr>
+            <tr>
+                <th>Members</th>
+                <td>{{ event.members|length }}</td>
+            </tr>
+            <tr>
+                <th>Founding</th>
+                <td>{{ event.founding }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ event.address }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('event') }}">
+            Back to the list
+        </a>
+    </li>
+            <li>
+                <a href="{{ path('event_join', { 'id': event.id }) }}">
+                    Join this event
+                </a>
+            </li>
+    <li>
+        <a href="{{ path('event_edit', { 'id': event.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,34 @@
+<?php
+
+namespace {{ namespace }}\Controller;
+
+{% block use_statements %}
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+
+use Tracko\BaseBundle\Controller\BaseController;
+
+{% endblock use_statements %}
+
+{% block class_definition %}
+/**
+ * DefaultController Class
+ */
+class DefaultController extends BaseController
+{% endblock class_definition %}
+{
+{% block class_body %}
+
+    /**
+     * @Route("/hello")
+     * @Template()
+     */
+    public function indexAction()
+    {
+
+
+    }
+{% endblock class_body %}
+}

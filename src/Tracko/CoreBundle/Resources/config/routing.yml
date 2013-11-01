@@ -1,0 +1,6 @@
+wordpress:
+  resource: "@TrackoCoreBundle/Resources/config/routing/wordpress.yml"
+  prefix:   /site
+
+#_index:
+#  pattern: /

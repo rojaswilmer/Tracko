@@ -1,0 +1,360 @@
+@font-face {
+    font-family: 'colaborate-thinregular';
+    src: url('/font/ColabThi-webfont.eot');
+    src: url('/font/ColabThi-webfont.eot?#iefix') format('embedded-opentype'), url('/font/ColabThi-webfont.woff') format('woff'), url('ColabThi-webfont.ttf') format('truetype'), url('ColabThi-webfont.svg#colaborate-thinregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'colaborate-regularregular';
+    src: url('/font/ColabReg-webfont.eot');
+    src: url('/font/ColabReg-webfont.eot?#iefix') format('embedded-opentype'), url('/font/ColabReg-webfont.woff') format('woff'), url('ColabReg-webfont.ttf') format('truetype'), url('ColabReg-webfont.svg#colaborate-regularregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'colaborate-mediumregular';
+    src: url('/font/ColabMed-webfont.eot');
+    src: url('/font/ColabMed-webfont.eot?#iefix') format('embedded-opentype'), url('/font/ColabMed-webfont.woff') format('woff'), url('ColabMed-webfont.ttf') format('truetype'), url('ColabMed-webfont.svg#colaborate-mediumregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'colaboratelightregular';
+    src: url('/font/ColabLig-webfont.eot');
+    src: url('/font/ColabLig-webfont.eot?#iefix') format('embedded-opentype'), url('/font/ColabLig-webfont.woff') format('woff'), url('ColabLig-webfont.ttf') format('truetype'), url('ColabLig-webfont.svg#colaboratelightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'colaborate-boldregular';
+    src: url('/font/ColabBol-webfont.eot');
+    src: url('/font/ColabBol-webfont.eot?#iefix') format('embedded-opentype'), url('/font/ColabBol-webfont.woff') format('woff'), url('ColabBol-webfont.ttf') format('truetype'), url('ColabBol-webfont.svg#colaborate-boldregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'colaborate-thinregular', 'Trebuchet MS', sans-serif;
+    background-color: #5D5D5D;
+    color: #fff;
+}
+
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    border: 0;
+}
+
+.loginPage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+    .loginPage .content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        padding: 10% 5%;
+    }
+
+        .loginPage .content .logo {
+            height: auto;
+            max-width: 500px;
+            width: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .loginPage .content span {
+            margin-top: 2%;
+            font-size: 2em;
+            text-align: center;
+            display: block;
+            color: #fff;
+        }
+
+        .loginPage .content .loginArea {
+            max-width: 600px;
+            margin: 5% auto;
+        }
+
+            .loginPage .content .loginArea input[type="text"] {
+                border-radius: 10px;
+                background-color: #5D5D5D;
+                border: 2px solid #fff;
+                display: block;
+                width: 80%;
+                padding: 1em;
+                margin: 1em auto 0;
+                text-align: center;
+            }
+
+                .loginPage .content .loginArea input[type="text"]:first-child {
+                    margin-top: 0;
+                }
+
+            .loginPage .content .loginArea input[type="submit"] {
+                background-color: #A3C844;
+                border-radius: 10px;
+                padding: 1em;
+                color: #fff;
+                margin: 1em auto 0;
+                text-transform: uppercase;
+                display: block;
+                text-align: center;
+            }
+
+            .loginPage .content .loginArea a {
+                color: #fff;
+                display: block;
+                margin: 2em auto;
+                text-align: center;
+            }
+
+@media all and (max-width:500px) {
+
+    .loginPage .content .loginArea input[type="text"] {
+        width: 100%;
+    }
+}
+
+.header {
+    width: 100%;
+    background: #fff;
+}
+
+    .header .topHeader {
+        width: 100%;
+        display: block;
+        background: #7EC04B;
+        line-height: 2em;
+    }
+
+    .header .topHeader {
+        padding-right: 2%;
+        text-align: right;
+        text-transform: uppercase;
+    }
+
+        .header .topHeader span:before {
+            content: "|";
+            padding: 0 1em;
+            width: 1em;
+        }
+
+        .header .topHeader span:first-child:before {
+            content: "";
+        }
+
+    .header .banner {
+        position: relative;
+    }
+
+        .header .banner img {
+            width: 40%;
+            max-width: 300px;
+            margin: 2em;
+            margin-right: 5%;
+        }
+
+        .header .banner span {
+            font-family: colaborate-mediumregular;
+            text-transform: uppercase;
+            color: #666666;
+            font-size: 2em;
+            display: inline-block;
+            vertical-align: middle;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            line-height: 1em;
+            height: 1em;
+        }
+
+.content {
+    width: 100%;
+    height: 100%;
+    padding: 2%;
+}
+
+    .content .event-item {
+        padding-left: 0;
+        list-style: none;
+    }
+
+        .content .event-item:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .content .event-item li {
+            display: inline-block;
+            height: 633px;
+            float: left;
+            width: 25%;
+            margin-right: 3%;
+            margin-bottom: 3%;
+            display: inline-block;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            color: #666;
+            text-align: justify;
+        }
+
+            .content .event-item li.new {
+                background-color: #ccc;
+            }
+
+                .content .event-item li.new a {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                }
+
+                    .content .event-item li.new a .add {
+                        position: absolute;
+                        margin: auto;
+                        top: 0;
+                        left: 0;
+                        bottom: 0;
+                        right: 0;
+                        height: 1em;
+                        text-align: center;
+                        display: inline-block;
+                        font-family: colaborate-mediumregular;
+                        text-transform: uppercase;
+                        color: #666666;
+                    }
+
+                    .content .event-item li.new a:hover {
+                        background-color: #f6f6f6;
+                    }
+
+        .content .event-item .wrap {
+            padding: 2em;
+        }
+
+        .content .event-item .title {
+            font-family: colaborate-mediumregular;
+            font-size: 1.3em;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1em;
+            display: block;
+        }
+
+        .content .event-item p {
+            display: block;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 1em;
+        }
+
+        .content .event-item a {
+            font-family: colaborate-mediumregular;
+            display: block;
+            background-color: #ccc;
+            text-transform: uppercase;
+            color: #666;
+            text-align: right;
+            text-decoration: none;
+            padding: 1em 1em 1em 0;
+        }
+
+            .content .event-item a:hover {
+                background-color: #f6f6f6;
+            }
+
+        .content .event-item img {
+            width: 100%;
+            height: auto;
+            padding-bottom: 1em;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .content .event-item a:hover, .content .event-item a:visited {
+            color: #666;
+        }
+
+        .content .event-item .participants {
+            margin-bottom: 1em;
+        }
+
+            .content .event-item .participants .thumbnail {
+                margin-right: 1em;
+                background-color: #3db9cc;
+                border-radius: 50%;
+                width: 3em;
+                height: 3em;
+                display: inline-block;
+            }
+
+                .content .event-item .participants .thumbnail span {
+                    background: url('/images/icon-people.png') no-repeat 50% 50%;
+                    background-size: 50%;
+                    height: 100%;
+                    width: 100%;
+                    display: block;
+                }
+
+            .content .event-item .participants span {
+                font-family: colaborate-mediumregular;
+                display: inline-block;
+                font-size: 2em;
+                color: #3db9cc;
+            }
+
+
+        .content .event-item .money .thumbnail {
+            margin-right: 1em;
+            background-color: #7EC04B;
+            border-radius: 50%;
+            width: 3em;
+            height: 3em;
+            display: inline-block;
+        }
+
+            .content .event-item .money .thumbnail span {
+                background: url('/images/icon-euro.png') no-repeat 50% 50%;
+                background-size: 50%;
+                height: 100%;
+                width: 100%;
+                display: block;
+            }
+
+        .content .event-item .caption {
+            font-size: 0.8em;
+        }
+
+        .content .event-item .money span {
+            font-family: colaborate-mediumregular;
+            display: inline-block;
+            font-size: 2em;
+            color: #7EC04B;
+        }
+
+.footer {
+    display: block;
+    line-height: 2em;
+    padding-top: 1em;
+    margin: 0 2%;
+    border-top: 1px solid #ccc;
+}
+
+    .footer img {
+        max-width: 100px;
+    }

@@ -1,0 +1,15 @@
+tracko_user:
+    resource: "@TrackoUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+tracko_event:
+    resource: "@TrackoEventBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+tracko_company:
+    resource: "@TrackoCompanyBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

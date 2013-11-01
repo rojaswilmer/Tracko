@@ -1,0 +1,24 @@
+{% extends 'TrackoCoreBundle:Base:responsive.html.twig' %}
+
+{% block content -%}
+    <h1>Login</h1>
+<div data-hull-component="login/profile@hull" data-hull-foo="FOO" data-hull-bar="BAR"></div>
+<div data-hull-component="comments/list@hull" data-hull-uid="526f90af33a1593cde000041"></div>
+<div data-hull-component="likes/list@hull" data-hull-uid="XYZ">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="//d3f5pyioow99x0.cloudfront.net/0.7.5/hull.js"></script>
+<script type='text/javascript'>
+Hull.init({
+  // debug: true, //Enable to see all traces from the app
+  appId : "526f90af33a1593cde000041",
+  orgUrl: "https://3d5c0a42.hullapp.io"
+}, function(hull){
+$.post('/user/login',hull.me,function(data){
+console.log(data); });
+  console.log(hull);
+  
+});
+</script>
+<script type="text/x-template" data-hull-template="login/profile/profile">
+    {% endblock %}

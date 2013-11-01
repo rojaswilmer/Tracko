@@ -1,0 +1,252 @@
+{% block form %}
+    {% spaceless %}
+        {{ form_start(form, {'attr':{'class':'ink-form' }}) }}
+        <fieldset>
+            {{ form_widget(form) }}
+        </fieldset>
+        {{ form_end(form) }}
+    {% endspaceless %}
+{% endblock form %}
+
+{% block form_start %}
+    {% spaceless %}
+        {# Add ink-form class if not set #}
+        {% set attr=attr|merge({'class':'ink-form'}) %}
+        {% set method = method|upper %}
+        {% if method in ["GET", "POST"] %}
+            {% set form_method = method %}
+        {% else %}
+            {% set form_method = "POST" %}
+        {% endif %}
+        <form
+        method="{{ form_method|lower }}" action="{{ action }}"{% for attrname, attrvalue in attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}{% if multipart %} enctype="multipart/form-data"{% endif %}>
+        {% if form_method != method %}
+            <input type="hidden" name="_method" value="{{ method }}"/>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_start %}
+
+{% block form_row %}
+    {% spaceless %}
+        <div class="control-group column-group gutters {% if required %}required{% endif %}">
+            {{ form_errors(form) }}
+            {{ form_label(form, null, {'label_attr': {'class':'large-20 medium-100 small-100 content-right' }}) }}
+            <div class="control large-80 medium-100 small-100">{{ form_widget(form) }}</div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block widget_attributes %}
+    {% spaceless %}
+        {% if attr['id'] is not defined %}
+            id="{{ id }}"
+        {% endif %}
+        name="{{ full_name }}"
+        {% if read_only %} disabled="disabled"{% endif %}
+        {% if required %} required="required"{% endif %}
+        {% if max_length %} maxlength="{{ max_length }}"{% endif %}
+        {% if pattern %} pattern="{{ pattern }}"{% endif %}
+
+        {{ block('element_attributes') }}
+
+    {% endspaceless %}
+{% endblock widget_attributes %}
+
+{% block widget_container_attributes %}
+    {% spaceless %}
+        {% if id is not empty %}id="{{ id }}" {% endif %}
+        {{ block('element_attributes') }}
+    {% endspaceless %}
+{% endblock widget_container_attributes %}
+
+
+
+{#A generic label is when you use a formtype within an other formtype#}
+{# This is also used with the date widget #}
+{% block form_label %}
+    {% spaceless %}
+        {% if not compound %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+
+        {% if attr['label'] is defined %}
+            {% set label=attr['label'] %}
+        {% endif %}
+
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+
+        {% if label!='null' %}{#use this if you dont want a generic label #}
+            <label for="{{ id }}"{{ block('label_attributes') }}>{{ block('darwin_translate_label') }}</label>
+            {% if not required and
+            (attr['optional_hint'] is not defined or attr['optional_hint']!=false) and
+            ('checkbox' not in block_prefixes and 'radio' not in block_prefixes) %}
+                <small class="label-optional">({% trans %}word.optional{% endtrans %})</small>
+            {% endif %}
+        {% endif %}
+        {{ block('data_help') }}
+    {% endspaceless %}
+{% endblock %}
+
+{% block darwin_translate_label %}{{ label|trans }}{% endblock %}
+{% block darwin_translate_help %}{{ attr['data-help']|trans }}{% endblock %}
+{% block darwin_translate_placeholder %}{{ attr['data-placeholder']|trans }}{% endblock %}
+
+{% block data_help %}
+    {% spaceless %}
+        {% if attr['data-help'] is defined %}
+            <a class="help icon" href="#">{% trans %}form.default.explain{% endtrans %}</a>
+            <div style="display:none;" class="fxtrans help hidden">{{ block('darwin_translate_help') }}</div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+
+
+
+{% block choice_widget %}
+    {% spaceless %}
+        {% if expanded %}
+            <div {{ block('widget_container_attributes') }}>
+                <div class="expanded_choice_wrap">
+                    {% for child in form %}
+                        {{ form_widget(child) }}
+                        {{ form_label(child) }}
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+                {% if empty_value is not none %}
+                    <option value="">{{ empty_value|trans }}</option>
+                {% endif %}
+                {% if preferred_choices|length > 0 %}
+                    {% set options = preferred_choices %}
+                    {{ block('choice_widget_options') }}
+                    {% if choices|length > 0 and separator is not none %}
+                        <option disabled="disabled">{{ separator }}</option>
+                    {% endif %}
+                {% endif %}
+                {% set options = choices %}
+                {{ block('choice_widget_options') }}
+            </select>
+        {% endif %}
+    {% endspaceless %}
+{% endblock choice_widget %}
+
+{% block date_widget %}
+    {% spaceless %}
+        <div {{ block('widget_container_attributes') }}>
+            <div class="datetime_widget">
+                {{ '{{ day }} {{ month }} {{ year }}'|replace({
+                '{{ day }}': form_widget(form.day),
+                '{{ month }}': form_widget(form.month),
+                '{{ year }}': form_widget(form.year),
+                })|raw }}
+                <div class="clearer"></div>
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock date_widget %}
+
+
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <ul class="form-errors">
+                {% for error in errors %}
+                    <li>{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}
+
+
+{% block choice_widget_options %}
+    {% spaceless %}
+        {% for group_label, choice in options %}
+            {% if choice is iterable %}
+                <optgroup label="{{ group_label|trans({}, translation_domain) }}">
+                    {% set options = choice %}
+                    {{ block('choice_widget_options') }}
+                </optgroup>
+            {% else %}
+                <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}
+                {% if choice.attr is defined %}
+                    {% for attrname, attrvalue in choice.attr %}{% if attrname in ['title'] %}{{ attrname }}="{{ attrvalue|trans({}, translation_domain) }}" {% else %}{{ attrname }}="{{ attrvalue }}" {% endif %}{% endfor %}
+                {% endif %}
+                >{{ choice.label|trans({}, translation_domain) }}</option>
+            {% endif %}
+        {% endfor %}
+    {% endspaceless %}
+{% endblock choice_widget_options %}
+
+{# This is our special yesno widget. Design it if you like. #}
+{% block yesno_widget %}
+    {% spaceless %}
+        {{ block('choice_widget') }}
+    {% endspaceless %}
+{% endblock %}
+
+{#
+#
+# Attributes
+#
+#}
+
+
+{# print the element attributes #}
+{% block element_attributes %}
+    {% for attrname,attrvalue in attr %}
+        {# do not print these attributes in the element#}
+        {% if   attrname != 'data-help' and
+        attrname != 'label' and
+        attrname != 'optional_hint' %}
+
+            {% if attrname == 'data-autocomplete-url' %}
+                {# remove me, and use data-path instead #}
+                {% set attrvalue = path(attrvalue) %}
+            {% endif %}
+
+            {% if attrname == 'data-path' %}
+                {% set attrname = 'data-url' %}
+                {% if(attr['data-path-id'] is defined) %}
+                    {% set pathParam = {id:attr['data-path-id']} %}
+                {% else %}
+                    {% set pathParam = {} %}
+                {% endif %}
+
+
+                {% set attrvalue = path(attrvalue,pathParam) %}
+            {% endif %}
+
+            {% if attrname == 'data-placeholder' or attrname == 'data-label' %}
+                {% set attrvalue = attrvalue|trans %}
+            {% endif %}
+
+
+            {{ attrname }}="{{ attrvalue }}"
+        {% endif %}
+    {% endfor %}
+{% endblock element_attributes %}
+
+{# print the element attributes #}
+{% block label_attributes %}
+    {% for attrname,attrvalue in label_attr %}
+        {{ attrname }}="{{ attrvalue }}"
+    {% endfor %}
+{% endblock label_attributes %}
+
+{% block button_widget %}
+    {% set attr = attr|merge({'class': 'ink-button'}) %}
+    {% spaceless %}
+        {% if label is empty %}
+            {% set label = name|humanize %}
+        {% endif %}
+        <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain) }}</button>
+    {% endspaceless %}
+{% endblock button_widget %}

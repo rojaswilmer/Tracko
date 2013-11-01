@@ -1,0 +1,8 @@
+/* Last table column always right align */
+tr td:last-child, tr th:last-child {
+    text-align: right;
+}
+
+tr td:last-child nav, tr th:last-child nav {
+    float: right;
+}

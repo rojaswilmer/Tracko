@@ -1,0 +1,12 @@
+mail:
+  footer:
+    link:
+      lostpassword:
+        description: "Har du glömt ditt lösenord?"
+        label: "Klicka här för att byta det."
+      login:
+        description: "Vill du se dina ansökningar?"
+        label: "Klicka här för att se dem."
+    contact:
+      address: "Döbelnsgatan 21, 111 40 Stockholm, Sweden"
+      label: "HappyR"

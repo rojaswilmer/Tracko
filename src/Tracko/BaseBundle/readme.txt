@@ -1,0 +1,1 @@
+Here is only classes and resources that never will be used directly. These files must be inherited form others.

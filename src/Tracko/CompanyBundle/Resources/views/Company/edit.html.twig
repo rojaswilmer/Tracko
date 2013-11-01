@@ -1,0 +1,16 @@
+{% extends 'TrackoCoreBundle:Base:responsive.html.twig' %}
+
+{% block content -%}
+    <h1>Company edit</h1>
+
+    {{ form(form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('company') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

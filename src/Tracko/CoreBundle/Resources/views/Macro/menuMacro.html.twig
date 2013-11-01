@@ -1,0 +1,38 @@
+{# Print class if the route is the current route #}
+{% macro isSelected(route, class) %}
+    {% spaceless %}
+        {% if app.request.attributes.get('_route') == route %}
+            {% if class is not null %}
+                {{ class }}
+            {% else %}
+                selected
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro menuItem(text, route, params, class) %}
+    {% import _self as this %}
+    {% if params is null %}
+        {% set params={} %}
+    {% endif %}
+    {% spaceless %}
+        <li>
+            <a class="button {{ this.isSelected(route) }} {{ class }}" href="{{ path(route, params) }}">
+                {{ text }}
+            </a>
+        </li>
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro linkButton(text, route, params, class) %}
+    {% import _self as this %}
+    {% if params is null %}
+        {% set params={} %}
+    {% endif %}
+    {% spaceless %}
+        <a class="wl-button ink-button {{ this.isSelected(route) }} {{ class }}" href="{{ path(route, params) }}">
+            {{ text }}
+        </a>
+    {% endspaceless %}
+{% endmacro %}

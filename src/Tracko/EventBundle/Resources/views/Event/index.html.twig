@@ -1,0 +1,29 @@
+{% extends 'TrackoCoreBundle:Base:responsive.html.twig' %}
+{% block event_name %}Events List{% endblock %}
+{% block content -%}
+<h1>Events List</h1>
+<ul class="event-item">
+{% for event in events %}
+        <li>
+            <div class="wrap">
+                <span class="title">{{ event.name }}</span>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lorem felis, pellentesque nec tempus quis, sodales in purus. Donec justo ipsum, molestie varius sapien ut, sagittis porta leo
+                </p>
+                <span class="caption">Sponsor</span>
+                {% image '@TrackoCoreBundle/Resources/public/images/cadbudy-logo.png' %}
+                    <img src="{{ asset_url }}" alt="{{event.name}}"/>
+                    {% endimage %}
+                <div class="participants"><div class="thumbnail"><span>&nbsp</span></div><span>{{ event.members|length }}</span> participants</div>
+                <div class="money"><div class="thumbnail"><span>&nbsp</span></div><span>€{{ event.founding }}</span> raised so far</div>
+            </div>
+            <a href="{{ path('event_show', { 'id': event.id }) }}">Check more ></a>
+        </li>
+{% endfor %}
+ <li class="new">
+ <a href="{{ path('event_create') }}">
+            <span class="add">Add new event</span>
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

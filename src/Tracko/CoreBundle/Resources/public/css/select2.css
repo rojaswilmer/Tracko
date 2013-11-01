@@ -1,0 +1,27 @@
+/* Overrides for select2 formatting */
+
+/* select2 css overrides */
+.body .select2-container {
+    display: block;
+    margin: 0.35em 0 0.5em 0;
+}
+
+.body .datetime_widget .select2-container {
+    display: inline-block;
+    margin: 0.35em 0.5em 0.5em 0;
+    min-width: 23%;
+}
+
+.body .select2-container .select2-choice {
+    color: #222;
+    padding: 0.15em;
+    padding-left: 0.35em;
+}
+
+body .select2-container .select2-choice .select2-arrow b {
+    background-position: 0 3px;
+}
+
+body .date-row .select2-display-none {
+    display: none;
+}

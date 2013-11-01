@@ -1,0 +1,64 @@
+{% block extends %}
+{{ "{% extends 'TrackoCoreBundle:Base:responsive.html.twig' %}" }}
+{% endblock extends %}
+
+{% block body %}
+{{ "{% block content -%}" }}
+    <h1>{{ entity }} list</h1>
+
+    <table class="item-list">
+        <thead>
+            <tr>
+            {%- for field, metadata in fields %}
+
+                <th>{{ field|capitalize }}</th>
+
+            {%- endfor %}
+
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{ '{% for '~ entity|lower ~' in '~ entity|lower ~'s %}' }}
+            <tr>
+
+        {%- for field, metadata in fields %}
+            {%- if loop.first and ('show' in actions) %}
+
+                <td><a href="{{ "{{ path('" ~ route_name_prefix ~ "_show', { 'id': "~ entity|lower ~".id }) }}" }}">{{ '{{ '~ entity|lower ~'.' ~ field|replace({'_': ''}) ~ ' }}' }}</a></td>
+
+            {%- elseif metadata.type in ['date', 'datetime'] %}
+
+                <td>{{ '{% if '~ entity|lower ~'.' ~ field|replace({'_': ''}) ~ ' %}{{ '~ entity|lower ~'.' ~ field|replace({'_': ''}) ~ '|date(\'Y-m-d H:i:s\') }}{% endif %}' }}</td>
+
+            {%- else %}
+
+                <td>{{ '{{ '~ entity|lower ~'.' ~ field|replace({'_': ''}) ~ ' }}' }}</td>
+
+            {%- endif %}
+
+            {%- if loop.last %}
+
+                <td>
+                    {%- include "crud/views/others/actions.html.twig.twig" %}
+                </td>
+
+            {%- endif %}
+        {%- endfor %}
+
+            </tr>
+        {{ '{% endfor %}' }}
+        </tbody>
+    </table>
+
+    {% if 'new' in actions %}
+    <ul>
+        <li>
+            <a href="{{ "{{ path('" ~ route_name_prefix ~ "_create') }}" }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endif %}
+{{ "{% endblock %}" }}
+{% endblock body %}

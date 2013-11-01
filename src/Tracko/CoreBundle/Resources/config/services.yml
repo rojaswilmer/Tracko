@@ -1,0 +1,42 @@
+parameters:
+  alex.core.id_translation.class: Tracko\CoreBundle\Services\IdTranslationService
+  alex.core.string_encryption.class: Tracko\CoreBundle\Services\StringEncryptionService
+  alex.core.string_service.class: Tracko\CoreBundle\Services\StringService
+  alex.core.cookie.class: Tracko\CoreBundle\Services\CookieService
+
+services:
+
+  alex.core.id_translation:
+    class: %alex.core.id_translation.class%
+
+  alex.core.string_service:
+    class: %alex.core.string_service.class%
+    arguments: []
+
+  alex.core.string_encryption:
+    class: %alex.core.string_encryption.class%
+    arguments: [@alex.core.string_service]
+
+  alex.core.cookie:
+    class: %alex.core.cookie.class%
+    calls:
+      - [setRequest, ['@?request=']]
+
+
+  alex.core.param_converter.public_id:
+    class: Tracko\CoreBundle\Request\ParamConverter\PublicIdConverter
+    arguments: [@alex.core.id_translation]
+    tags:
+       - { name: request.param_converter, priority:4711, converter: public_id }
+
+  alex.core.util.new_relic.transaction_naming_strategy:
+    class: Tracko\CoreBundle\Util\NewRelic\TransactionNamingStrategy
+
+  alex.core..form.type.gender:
+    class: Tracko\CoreBundle\Form\Type\YesNoType
+    tags:
+      - { name: form.type, alias: yesno }
+
+  alex.core.cache_service:
+    class: Tracko\CoreBundle\Services\CacheService
+    arguments: [@router]

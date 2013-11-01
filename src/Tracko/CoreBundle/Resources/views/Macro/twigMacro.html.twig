@@ -1,0 +1,24 @@
+{# Print an url. Set url as label if no label given #}
+{% macro url(url, label, class, targetBlank) %}
+    {% spaceless %}
+        <a href="{{ url }}"
+           class="{{ class }}"
+           {% if targetBlank %}target="_blank"{% endif %}
+                >{{ label|default(url) }}</a>
+    {% endspaceless %}
+{% endmacro %}
+
+{% macro opusLocation(opus) %}
+    {% spaceless %}
+        <span itemscope itemtype="http://www.schema.org/City">
+        {% if opus.location.city is not null %}
+            <span itemprop="name">{{ opus.location.city }}</span>,
+        {% endif %}
+            <span>{{ opus.location.country }}</span>
+        <span itemprop="geo" itemscope itemtype="http://www.schema.org/GeoCoordinates">
+            <meta itemprop="latitude" content="{{ opus.location.coords.lat }}"/>
+            <meta itemprop="longitude" content="{{ opus.location.coords.lng }}"/>
+        </span>
+    </span>
+    {% endspaceless %}
+{% endmacro %}

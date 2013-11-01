@@ -1,0 +1,109 @@
+<!doctype html>
+<!--[if lt IE 9]>
+<html class="ie" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
+<![endif]-->
+<!--[if gte IE 9]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="http://www.facebook.com/2008/fbml">
+<!--<![endif]-->
+
+<!--
+	The comment jumble above is handy for targeting old IE with CSS.
+	http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+-->
+
+{% import "TrackoCoreBundle:Macro:twigMacro.html.twig" as _twigMacro %}
+
+<head>
+    <meta charset="utf-8"/>
+    <!-- Please don't add "maximum-scale=1" here. It's bad for accessibility. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+    <title>{% block title_meta %}{% block title_prefix %}{% trans %}site.slogan{% endtrans %}{% endblock %}{% block title %} | {% endblock %}{% block title_suffix %}{% trans %}site.name{% endtrans %}{% endblock %}{% endblock %}</title>
+
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+
+
+    {% block iefix %}{% endblock %}
+
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite'
+        '@TrackoCoreBundle/Resources/public/css/*'
+        '@TrackoUserBundle/Resources/public/css/*'
+
+         %}
+        <link rel="stylesheet" type="text/css" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+
+    {% endblock %}
+
+    <!--[if IE 7]>
+
+    <![endif]-->
+
+
+
+    {% block head_javascripts %}{% endblock %}
+
+</head>
+<body lang="sv" class="body {% block bodyclass %}{% endblock %}">
+
+<noscript>
+    <div id="noscript-warning">{% trans %}alex.base.no_javascript{% endtrans %}</div>
+    <br/><br/>
+</noscript>
+
+
+   
+
+    {% block flash_wrap %}
+        {% if app.session.flashbag.all()|length > 0 %}
+            <!-- FLASH -->
+            <div id="flash" class="column-group quarter-gutters">
+                <div class="large-5"></div>
+                <div class="large-90">
+                    {% block flash %}
+                        {% for type, flashMessages in app.session.flashbag.all() %}
+                            {% for idx, flashMessage in flashMessages %}
+                                <div class="flash {{ type }}">{# type is success|fail|warning|notice #}
+                                    {{ flashMessage|trans }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endblock %}
+                </div>
+                <div class="large-5"></div>
+            </div>
+        {% endif %}
+    {% endblock flash_wrap %}
+
+    
+
+    <!-- CONTENT -->
+            {% block content %}{% endblock %}
+
+    
+
+
+{% block javascripts %}
+
+    {#import the google maps script#}
+
+    {% javascripts
+
+    '@TrackoCoreBundle/Resources/public/js/*'
+ %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+
+{% endblock %}
+
+</body>
+
+</html>

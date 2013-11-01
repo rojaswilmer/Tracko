@@ -1,0 +1,7 @@
+
+
+services:
+
+    tracko.user_security:
+        class: Tracko\UserBundle\Services\SecurityService
+        arguments: [@event_dispatcher, @security.context]

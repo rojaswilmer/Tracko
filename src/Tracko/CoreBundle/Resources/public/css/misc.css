@@ -1,0 +1,64 @@
+/**
+ * Misc
+ */
+
+#noscript-warning {
+    width: 100%;
+    z-index: 101;
+    text-align: center;
+    font-size: 120%;
+    color: #fff;
+    background-color: #AE0000;
+    padding: 5px 0px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+/**
+ * Colors
+ */
+
+.hr-bg-river {
+    background-color: #009DD9;
+}
+
+.hr-bg-belize {
+    background-color: #0083B5;
+}
+
+.hr-bg-midnight {
+    background-color: #283E50;
+}
+
+.hr-bg-clouds {
+    background-color: #ECF0F1;
+}
+
+.hr-bg-white {
+    background-color: #FFFFFF;
+}
+
+.hr-bg-silver {
+    background-color: #BCC3C7;
+}
+
+.hr-bg-amethyst {
+    background-color: #9D5DB2;
+}
+
+.hr-bg-asphalt {
+    background-color: #596E7E;
+}
+
+.hr-bg-pumpkin {
+    background-color: #DE4C12;
+}
+
+.hr-bg-nephritis {
+    background-color: #00AC67;
+}
+
+.hr-bg-emerland {
+    background-color: #00CA77;
+}

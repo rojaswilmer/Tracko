@@ -1,0 +1,11 @@
+
+
+services:
+
+  alex.core.cache.opus.events:
+    class: Tracko\CoreBundle\EventListener\Cache\OpusListener
+    arguments: [@alex.core.cache_service]
+    tags:
+      - { name: kernel.event_listener, event: lego.opus.updated, method: purgeOpusCache }
+      - { name: kernel.event_listener, event: lego.opus.unpublish, method: purgeOpusCache }
+      - { name: kernel.event_listener, event: lego.opus.publish, method: purgeOpusCache }

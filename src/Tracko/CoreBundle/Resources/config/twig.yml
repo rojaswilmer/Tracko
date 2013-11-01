@@ -1,0 +1,31 @@
+
+services:
+
+  alex.core.text_twig_extension:
+    class: Tracko\CoreBundle\Twig\TextExtension
+    tags:
+      - { name: twig.extension }
+
+  alex.core.core_twig_extension:
+    class: Tracko\CoreBundle\Twig\CoreTwigExtension
+    arguments: [@service_container]
+    tags:
+      - { name: twig.extension }
+
+  alex.core.menu_twig_extension:
+    class: Tracko\CoreBundle\Twig\MenuExtension
+    calls:
+      - [setRequest, ['@?request=']]
+    tags:
+      - { name: twig.extension }
+
+  alex.core.static_twig_extension:
+    class: Tracko\CoreBundle\Twig\StaticExtension
+    tags:
+      - { name: twig.extension }
+
+  alex.core.number_twig_extension:
+    class: Tracko\CoreBundle\Twig\NumberExtension
+    arguments: [@alex.core.id_translation]
+    tags:
+      - { name: twig.extension }

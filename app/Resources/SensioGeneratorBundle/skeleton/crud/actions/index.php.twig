@@ -1,0 +1,36 @@
+
+    /**
+{% block phpdoc_method_header %}
+     * Lists all {{ entity }} entities.
+{% endblock phpdoc_method_header %}
+     *
+{% block phpdoc_method_annotations %}
+{% if 'annotation' == format %}
+     * @Route("/", name="{{ route_name_prefix }}")
+     * @Method("GET")
+     * @Template()
+     *
+     * @return array
+{% endif %}
+{% endblock phpdoc_method_annotations %}
+     */
+{% block method_definition %}
+    public function indexAction()
+{% endblock method_definition %}
+    {
+{% block method_body %}
+    ${{ varname }}s = $this->getRepo('{{ bundle }}:{{ entity }}')->findAll();
+{% endblock method_body %}
+
+{% block method_return %}
+{% if 'annotation' == format %}
+        return array(
+            '{{ varname }}s' => ${{ varname }}s,
+        );
+{% else %}
+        return $this->render('{{ bundle }}:{{ entity|replace({'\\': '/'}) }}:index.html.twig', array(
+            '{{ varname }}s' => ${{ varname }}s,
+        ));
+{% endif %}
+{% endblock method_return %}
+    }
